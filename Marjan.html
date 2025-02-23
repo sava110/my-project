@@ -10,8 +10,13 @@
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
-            background-color: #2c3e50;
+            background-color: #08864a;
             padding: 20px;
+        }
+        .group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .tile {
             width: 50px;
@@ -35,32 +40,37 @@
 <body>
     <script>
         const groups = [
-            { 
+            {
                 name: "萬子",
-                tiles:["🀇", "🀈", "🀉", "🀊", "🀋", "🀌", "🀍", "🀎", "🀏"]
+                tiles: ["🀇", "🀈", "🀉", "🀊", "🀋", "🀌", "🀍", "🀎", "🀏"]
             },
             {
                 name: "筒子",
-                tiles:["🀙", "🀚", "🀛", "🀜", "🀝", "🀞", "🀟", "🀠", "🀡"]
+                tiles: ["🀙", "🀚", "🀛", "🀜", "🀝", "🀞", "🀟", "🀠", "🀡"]
             },
             {
                 name: "索子",
-                tiles:["🀐", "🀑", "🀒", "🀓", "🀔", "🀕", "🀖", "🀗", "🀘"]
+                tiles: ["🀐", "🀑", "🀒", "🀓", "🀔", "🀕", "🀖", "🀗", "🀘"]
             },
             {
                 name: "字牌",
-                tiles:["🀀", "🀁", "🀂", "🀃","🀆", "🀅", "🀄"]
+                tiles: ["🀀", "🀁", "🀂", "🀃", "🀆", "🀅", "🀄"]
             }
         ];
-        
-        tiles.forEach(tile => {
-            const div = document.createElement("div");
-            div.classList.add("tile");
-            div.textContent = tile;
-            div.addEventListener("click", () => div.classList.toggle("active"));
-            document.body.appendChild(div);
+
+        groups.forEach(group => {
+            const groupDiv = document.createElement("div");
+            groupDiv.classList.add("group");
+            groupDiv.innerHTML = `<h3>${group.name}</h3>`;
+            group.tiles.forEach(tile => {
+                const div = document.createElement("div");
+                div.classList.add("tile");
+                div.textContent = tile;
+                div.addEventListener("click", () => div.classList.toggle("active"));
+                groupDiv.appendChild(div);
+            });
+            document.body.appendChild(groupDiv);
         });
     </script>
 </body>
 </html>
-,
