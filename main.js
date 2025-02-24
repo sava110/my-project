@@ -95,18 +95,23 @@ function resetChat() {
     // 最初の選択肢を表示
     buttonContainer.innerHTML = '';  // 現在のボタンを消去
     const button1 = document.createElement("button");
-    button1.textContent = "FAQ1";
+    button1.textContent = "YYProbe -iOS版について";
     button1.onclick = function() { showAnswer(1); };
 
     const button2 = document.createElement("button");
-    button2.textContent = "FAQ2";
+    button2.textContent = "YYProbe -Android版について";
     button2.onclick = function() { showAnswer(2); };
 
     const button3 = document.createElement("button");
-    button3.textContent = "FAQ3";
+    button3.textContent = "YY文字起こしについて";
     button3.onclick = function() { showAnswer(3); };
+
+    const button4 = document.createElement("button");
+    button4.textContent = "YYデスクトップについて";
+    button4.onclick = function() { showAnswer(4); };
 
     buttonContainer.appendChild(button1);
     buttonContainer.appendChild(button2);
     buttonContainer.appendChild(button3);
+    buttonContainer.appendChild(button4);
 }
