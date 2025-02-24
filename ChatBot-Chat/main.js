@@ -1,6 +1,6 @@
 // 初期のチャットメッセージを表示
 window.onload = function() {
-    addBotMessage("こんにちは！質問を選んでください。");
+    addBotMessage("こんにちは！YYSystemに関して聞きたい内容を選択してください。");
 };
 
 // チャットボックスにメッセージを追加
@@ -23,7 +23,7 @@ function addMessage(message, isUser = false) {
 // ユーザーの選択肢を処理
 function showAnswer(option) {
     // ユーザーのメッセージを表示
-    addMessage(`選択肢 ${option}`, true);
+    addMessage(` ${option}`, true);
 
     // 次のメッセージ（ボットの応答）を表示
     setTimeout(() => {
