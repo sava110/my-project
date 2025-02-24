@@ -1,6 +1,6 @@
 // 初期のチャットメッセージを表示
 window.onload = function() {
-    addBotMessage("こんにちは！YYSystemに関して聞きたい内容を選択してください。");
+    resetChat(); // ページ読み込み時にリセット
 };
 
 // チャットボックスにメッセージを追加
@@ -23,7 +23,7 @@ function addMessage(message, isUser = false) {
 // ユーザーの選択肢を処理
 function showAnswer(option) {
     // ユーザーのメッセージを表示
-    addMessage(` ${option}`, true);
+    addMessage(`選択肢 ${option}`, true);
 
     // 次のメッセージ（ボットの応答）を表示
     setTimeout(() => {
@@ -48,25 +48,65 @@ function showAnswer(option) {
         
         // 次の選択肢を表示
         setTimeout(() => {
-            displayNextButtons(option);
+            displayNextButtons();
         }, 1000);
     }, 1000);
 }
 
 // 次の選択肢を表示
-function displayNextButtons(option) {
+function displayNextButtons() {
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = '';  // 現在のボタンを消去
 
     // 新しい選択肢を表示
     const button1 = document.createElement("button");
     button1.textContent = "さらに詳しく";
-    button1.onclick = function() { showAnswer(option + 1); };
+    button1.onclick = function() { showAnswer(1); };
     
+    const button2 = document.createElement("button");
+    button2.textContent = "別のFAQを見たい";
+    button2.onclick = function() { showAnswer(2); };
+
+    const button3 = document.createElement("button");
+    button3.textContent = "トップに戻る";
+    button3.onclick = function() { resetChat(); };
+
     buttonContainer.appendChild(button1);
+    buttonContainer.appendChild(button2);
+    buttonContainer.appendChild(button3);
 }
 
 // ボットのメッセージを追加
 function addBotMessage(message) {
     addMessage(message, false);
+}
+
+// チャットをリセットして最初の状態に戻す
+function resetChat() {
+    const chatBox = document.getElementById("chat-box");
+    const buttonContainer = document.getElementById("button-container");
+
+    // チャットボックスの履歴を消去
+    chatBox.innerHTML = '';
+
+    // 最初のメッセージを表示
+    addBotMessage("こんにちは！質問を選んでください。");
+
+    // 最初の選択肢を表示
+    buttonContainer.innerHTML = '';  // 現在のボタンを消去
+    const button1 = document.createElement("button");
+    button1.textContent = "FAQ1";
+    button1.onclick = function() { showAnswer(1); };
+
+    const button2 = document.createElement("button");
+    button2.textContent = "FAQ2";
+    button2.onclick = function() { showAnswer(2); };
+
+    const button3 = document.createElement("button");
+    button3.textContent = "FAQ3";
+    button3.onclick = function() { showAnswer(3); };
+
+    buttonContainer.appendChild(button1);
+    buttonContainer.appendChild(button2);
+    buttonContainer.appendChild(button3);
 }
