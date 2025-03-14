@@ -68,6 +68,9 @@ function showAnswer(option, optionText) {
             case 3102:
                 response ="オフラインで使用することが可能です。";
                 break;
+            case 3103:
+                response ="YY文字起こしは個人がいつでも文字起こしをすぐに利用できるように、通信が出来ない場面を想定してオフラインの音声認識エンジンを準備しております。<br>インターネット通信がないとき、または機内モードでご使用いただけます。";
+                break;
             default:
                 response = "Error";
         }
@@ -153,6 +156,7 @@ function displayNextButtons(option) {
             //　「YY文字起こしに関するFAQ」を選択した場合
             addButton("内容の録音はできる？",3101);
             addButton("YY文字起こしはオフラインで使用可能?",3102);
+            addButton("オフライン文字認識エンジンについて",3103);
             addButton("トップに戻る",0);
             break;
         default:
