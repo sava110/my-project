@@ -21,9 +21,9 @@ function addMessage(message, isUser = false) {
 }
 
 // ユーザーの選択肢を処理
-function showAnswer(option) {
+function showAnswer(option, optionText) {
     // ユーザーのメッセージを表示
-    addMessage(`選択肢 ${option}`, true);
+    addMessage(`${optionText}`, true);
 
     // 次のメッセージ（ボットの応答）を表示
     setTimeout(() => {
@@ -32,13 +32,22 @@ function showAnswer(option) {
         // 各選択肢に対してボットが返す応答を設定
         switch(option) {
             case 1:
-                response = "FAQ1についての回答です。";
+                response = "YYProbe - iOS版についての詳細情報です。";
                 break;
             case 2:
-                response = "FAQ2についての回答です。";
+                response = "YYProbe - Android版についての詳細情報です。";
                 break;
             case 3:
-                response = "FAQ3についての回答です。";
+                response = "YY文字起こしについての詳細情報です。";
+                break;
+            case 4:
+                response = "YYデスクトップについての詳細情報です。";
+                break;
+            case 15:
+                response = "YYProbe -iOS版に関するFAQの一覧です。";
+                break;
+            case 16:
+                response = "無料プランは利用時間制限があります。詳細はアプリ内のお知らせ記事をご確認ください。法人版は利用時間制限はありません。";
                 break;
             default:
                 response = "もう一度選んでください。";
@@ -48,32 +57,95 @@ function showAnswer(option) {
         
         // 次の選択肢を表示
         setTimeout(() => {
-            displayNextButtons();
-        }, 1000);
-    }, 1000);
+            displayNextButtons(option); // 選択肢に応じて異なるボタンを表示
+        }, 500);
+    }, 500);
 }
 
 // 次の選択肢を表示
-function displayNextButtons() {
+function displayNextButtons(option) {
     const buttonContainer = document.getElementById("button-container");
     buttonContainer.innerHTML = '';  // 現在のボタンを消去
 
-    // 新しい選択肢を表示
-    const button1 = document.createElement("button");
-    button1.textContent = "さらに詳しく";
-    button1.onclick = function() { showAnswer(1); };
-    
-    const button2 = document.createElement("button");
-    button2.textContent = "別のFAQを見たい";
-    button2.onclick = function() { showAnswer(2); };
+    // 各選択肢に応じた異なるボタンを表示
+    switch(option) {
+        case 1:
+            // 「YYProbe - iOS版について」を選択した場合のボタン
+            addButton("YYProbe - iOS版に関するFAQ", 15);
+            addButton("YYProbe - iOS版の使用方法", 2);
+            addButton("次のステップ", 5);
+            break;
+        case 2:
+            // 「YYProbe - Android版について」を選択した場合のボタン
+            addButton("YYProbe - Android版に関するFAQ", 1);
+            addButton("YYProbe - Android版の使用方法", 2);
+            addButton("次のステップ", 5);
+            break;
+        case 3:
+            // 「YY文字起こしについて」を選択した場合のボタン
+            addButton("YY文字起こしの設定方法", 1);
+            addButton("YY文字起こしの使い方", 2);
+            addButton("次のステップ", 5);
+            break;
+        case 4:
+            // 「YYデスクトップについて」を選択した場合のボタン
+            addButton("YYデスクトップの設定方法", 1);
+            addButton("YYデスクトップの使用方法", 2);
+            addButton("次のステップ", 5);
+            break;
+        case 5:
+            // 「次のステップ」を選択した場合のボタン
+            addButton("関連情報", 6);
+            addButton("フィードバックを送る", 7);
+            addButton("トップに戻る", 0);
+            break;
+        case 6:
+            // 「関連情報」を選択した場合のボタン
+            addButton("YYProbe 最新情報", 8);
+            addButton("YY文字起こしのアップデート", 9);
+            addButton("トップに戻る", 0);
+            break;
+        case 7:
+            // 「フィードバックを送る」を選択した場合のボタン
+            addButton("フィードバックフォームを送る", 10);
+            addButton("トップに戻る", 0);
+            break;
+        case 8:
+            // 「YYProbe 最新情報」を選択した場合
+            addButton("YYProbe - iOS版 更新情報", 11);
+            addButton("YYProbe - Android版 更新情報", 12);
+            addButton("トップに戻る", 0);
+            break;
+        case 9:
+            // 「YY文字起こしのアップデート」を選択した場合
+            addButton("最新のYY文字起こし技術", 13);
+            addButton("YY文字起こしの新機能", 14);
+            addButton("トップに戻る", 0);
+            break;
+        case 15:
+            // 「YYProbe -iOS版に関するFAQ」を選択した場合
+            addButton("利用時間制限はある？",16);
+            addButton("トップに戻る",0);
+            break;
+        default:
+            // トップに戻るボタンのみ表示
+            addButton("トップに戻る", 0);
+    }
+}
 
-    const button3 = document.createElement("button");
-    button3.textContent = "トップに戻る";
-    button3.onclick = function() { resetChat(); };
-
-    buttonContainer.appendChild(button1);
-    buttonContainer.appendChild(button2);
-    buttonContainer.appendChild(button3);
+// ボタンを追加
+function addButton(text, option) {
+    const buttonContainer = document.getElementById("button-container");
+    const button = document.createElement("button");
+    button.textContent = text;
+    button.onclick = function() {
+        if (option === 0) {
+            resetChat(); // トップに戻る
+        } else {
+            showAnswer(option, text); // 次の選択肢に進む
+        }
+    };
+    buttonContainer.appendChild(button);
 }
 
 // ボットのメッセージを追加
@@ -94,24 +166,8 @@ function resetChat() {
 
     // 最初の選択肢を表示
     buttonContainer.innerHTML = '';  // 現在のボタンを消去
-    const button1 = document.createElement("button");
-    button1.textContent = "YYProbe -iOS版について";
-    button1.onclick = function() { showAnswer(1); };
-
-    const button2 = document.createElement("button");
-    button2.textContent = "YYProbe -Android版について";
-    button2.onclick = function() { showAnswer(2); };
-
-    const button3 = document.createElement("button");
-    button3.textContent = "YY文字起こしについて";
-    button3.onclick = function() { showAnswer(3); };
-
-    const button4 = document.createElement("button");
-    button4.textContent = "YYデスクトップについて";
-    button4.onclick = function() { showAnswer(4); };
-
-    buttonContainer.appendChild(button1);
-    buttonContainer.appendChild(button2);
-    buttonContainer.appendChild(button3);
-    buttonContainer.appendChild(button4);
+    addButton("YYProbe -iOS版について", 1);
+    addButton("YYProbe -Android版について", 2);
+    addButton("YY文字起こしについて", 3);
+    addButton("YYデスクトップについて", 4);
 }
