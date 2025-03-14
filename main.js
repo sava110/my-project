@@ -174,15 +174,23 @@ function addButton(text, option) {
     const buttonContainer = document.getElementById("button-container");
     const button = document.createElement("button");
     button.textContent = text;
+
+    // ボタンがクリックされたときに無効化
     button.onclick = function() {
+        // ボタンを無効化
+        button.disabled = true;
+
+        // 選択肢が0の場合はチャットをリセット
         if (option === 0) {
             resetChat(); // トップに戻る
         } else {
             showAnswer(option, text); // 次の選択肢に進む
         }
     };
+
     buttonContainer.appendChild(button);
 }
+
 
 // ボットのメッセージを追加
 function addBotMessage(message) {
