@@ -35,21 +35,27 @@ function showAnswer(option, optionText) {
             case 1000:
                 response = "YYProbe - iOS版についての詳細情報です。";
                 break;
-            case 2:
+            case 2000:
                 response = "YYProbe - Android版についての詳細情報です。";
                 break;
-            case 3:
+            case 3000:
                 response = "YY文字起こしについての詳細情報です。";
                 break;
-            case 4:
+            case 4000:
                 response = "YYデスクトップについての詳細情報です。";
                 break;
             case 1100:
                 response = "YYProbe -iOS版に関するFAQの一覧です。";
                 break;
             case 1101:
-                response = "無料プランは利用時間制限があります。詳細はアプリ内のお知らせ記事をご確認ください。法人版は利用時間制限はありません。";
+                response = "複数人で同時利用可能な会議コミュニケーションアプリです。<br>会議ルームを作成し、そこに多人数で参加する事で音声認識やキーボードを使ってコミュニケーションが取れるアプリです。<br><br>・会議ルームに複数人で参加可能<br>・会議内容をURL発行してブラウザで共有可能<br>・文字起こし内容をメール送信可能<br>・無料プランは利用時間制限あり<br>・法人プランあり<br>・法人プランにはYYAnaliticsと呼ぶ管理システムがあり、各種設定や会話分析、リアルタイム文字編集などが可能です。";
                 break;
+            case 1102:
+                response = "無料プランは利用時間制限があります。<br>詳細はアプリ内のお知らせ記事をご確認ください。<br>法人版は利用時間制限はありません。";
+                break;
+            case 1103:
+                response ="音声を録音します。<br>チャット画面で発言をタップすると録音された音声を再生可能です。<br>また、法人版は音声録音を「しない」設定も可能です。";
+            break;
             default:
                 response = "Error";
         }
@@ -127,6 +133,7 @@ function displayNextButtons(option) {
             // 「YYProbe -iOS版に関するFAQ」を選択した場合
             addButton("YYProbe -iOS版はどんなアプリ?",1101);
             addButton("利用時間制限はある？",1102);
+            addButton("録音されている？",1103)
             addButton("トップに戻る",0);
             break;
         default:
@@ -166,7 +173,6 @@ function addBotMessage(message) {
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 // チャットをリセットして最初の状態に戻す
 function resetChat() {
