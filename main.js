@@ -55,7 +55,10 @@ function showAnswer(option, optionText) {
                 break;
             case 1103:
                 response ="音声を録音します。<br>チャット画面で発言をタップすると録音された音声を再生可能です。<br>また、法人版は音声録音を「しない」設定も可能です。";
-            break;
+                break;
+            case 1104:
+                response ="可能です。編集方法は2種類あります。<br>①YYProbe / YYデスクトップ字幕で発言をタップして編集<br>②YYAnalitics(PCブラウザアプリ)で編集※<br>※パソコンで複数人でリアルタイム編集可能なツール<br>現時点では法人版のみ提供となっております。";
+                break;
             default:
                 response = "Error";
         }
@@ -134,6 +137,7 @@ function displayNextButtons(option) {
             addButton("YYProbe -iOS版はどんなアプリ?",1101);
             addButton("利用時間制限はある？",1102);
             addButton("録音されている？",1103)
+            addButton("発言を編集することは可能?",1104);
             addButton("トップに戻る",0);
             break;
         default:
