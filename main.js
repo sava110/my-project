@@ -59,6 +59,12 @@ function showAnswer(option, optionText) {
             case 1104:
                 response ="可能です。編集方法は2種類あります。<br>①YYProbe / YYデスクトップ字幕で発言をタップして編集<br>②YYAnalitics(PCブラウザアプリ)で編集※<br>※パソコンで複数人でリアルタイム編集可能なツール<br>現時点では法人版のみ提供となっております。";
                 break;
+            case 3100:
+                response ="YY文字起こしに関するFAQの一覧です。";
+                break;
+            case 3101:
+                response ="音声認識開始すると自動で録音されます。<br>録音データは、履歴画面から確認可能です。";
+                break;
             default:
                 response = "Error";
         }
@@ -82,25 +88,25 @@ function displayNextButtons(option) {
         case 1000:
             // 「YYProbe - iOS版について」を選択した場合のボタン
             addButton("YYProbe - iOS版に関するFAQ", 1100);
-            addButton("YYProbe - iOS版の使用方法", 1200);
+            addButton("YYProbe - iOS版の使い方", 1200);
             addButton("次のステップ", 5);
             break;
         case 2000:
             // 「YYProbe - Android版について」を選択した場合のボタン
             addButton("YYProbe - Android版に関するFAQ", 2100);
-            addButton("YYProbe - Android版の使用方法", 2200);
+            addButton("YYProbe - Android版の使い方", 2200);
             addButton("次のステップ", 5);
             break;
         case 3000:
             // 「YY文字起こしについて」を選択した場合のボタン
-            addButton("YY文字起こしの設定方法", 3100);
+            addButton("YY文字起こしに関するFAQ", 3100);
             addButton("YY文字起こしの使い方", 3200);
             addButton("次のステップ", 5);
             break;
         case 4000:
             // 「YYデスクトップについて」を選択した場合のボタン
-            addButton("YYデスクトップの設定方法", 4100);
-            addButton("YYデスクトップの使用方法", 4200);
+            addButton("YYデスクトップに関するFAQ", 4100);
+            addButton("YYデスクトップの使い方", 4200);
             addButton("次のステップ", 5);
             break;
         case 5:
@@ -138,6 +144,11 @@ function displayNextButtons(option) {
             addButton("利用時間制限はある？",1102);
             addButton("録音されている？",1103)
             addButton("発言を編集することは可能?",1104);
+            addButton("トップに戻る",0);
+            break;
+        case 3100:
+            //　「YY文字起こしに関するFAQ」を選択した場合
+            addButton("内容の録音はできる？",3101);
             addButton("トップに戻る",0);
             break;
         default:
