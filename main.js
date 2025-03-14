@@ -20,6 +20,7 @@ function addMessage(message, isUser = false) {
     chatBox.scrollTop = chatBox.scrollHeight;  // 新しいメッセージにスクロール
 }
 
+
 // ユーザーの選択肢を処理
 function showAnswer(option, optionText) {
     // ユーザーのメッセージを表示
@@ -31,7 +32,7 @@ function showAnswer(option, optionText) {
 
         // 各選択肢に対してボットが返す応答を設定
         switch(option) {
-            case 1:
+            case 1000:
                 response = "YYProbe - iOS版についての詳細情報です。";
                 break;
             case 2:
@@ -43,14 +44,14 @@ function showAnswer(option, optionText) {
             case 4:
                 response = "YYデスクトップについての詳細情報です。";
                 break;
-            case 15:
+            case 1100:
                 response = "YYProbe -iOS版に関するFAQの一覧です。";
                 break;
-            case 16:
+            case 1101:
                 response = "無料プランは利用時間制限があります。詳細はアプリ内のお知らせ記事をご確認ください。法人版は利用時間制限はありません。";
                 break;
             default:
-                response = "もう一度選んでください。";
+                response = "Error";
         }
 
         addBotMessage(response);
@@ -69,28 +70,28 @@ function displayNextButtons(option) {
 
     // 各選択肢に応じた異なるボタンを表示
     switch(option) {
-        case 1:
+        case 1000:
             // 「YYProbe - iOS版について」を選択した場合のボタン
-            addButton("YYProbe - iOS版に関するFAQ", 15);
-            addButton("YYProbe - iOS版の使用方法", 2);
+            addButton("YYProbe - iOS版に関するFAQ", 1100);
+            addButton("YYProbe - iOS版の使用方法", 1200);
             addButton("次のステップ", 5);
             break;
-        case 2:
+        case 2000:
             // 「YYProbe - Android版について」を選択した場合のボタン
-            addButton("YYProbe - Android版に関するFAQ", 1);
-            addButton("YYProbe - Android版の使用方法", 2);
+            addButton("YYProbe - Android版に関するFAQ", 2100);
+            addButton("YYProbe - Android版の使用方法", 2200);
             addButton("次のステップ", 5);
             break;
-        case 3:
+        case 3000:
             // 「YY文字起こしについて」を選択した場合のボタン
-            addButton("YY文字起こしの設定方法", 1);
-            addButton("YY文字起こしの使い方", 2);
+            addButton("YY文字起こしの設定方法", 3100);
+            addButton("YY文字起こしの使い方", 3200);
             addButton("次のステップ", 5);
             break;
-        case 4:
+        case 4000:
             // 「YYデスクトップについて」を選択した場合のボタン
-            addButton("YYデスクトップの設定方法", 1);
-            addButton("YYデスクトップの使用方法", 2);
+            addButton("YYデスクトップの設定方法", 4100);
+            addButton("YYデスクトップの使用方法", 4200);
             addButton("次のステップ", 5);
             break;
         case 5:
@@ -122,9 +123,10 @@ function displayNextButtons(option) {
             addButton("YY文字起こしの新機能", 14);
             addButton("トップに戻る", 0);
             break;
-        case 15:
+        case 1100:
             // 「YYProbe -iOS版に関するFAQ」を選択した場合
-            addButton("利用時間制限はある？",16);
+            addButton("YYProbe -iOS版はどんなアプリ?",1101);
+            addButton("利用時間制限はある？",1102);
             addButton("トップに戻る",0);
             break;
         default:
@@ -153,6 +155,19 @@ function addBotMessage(message) {
     addMessage(message, false);
 }
 
+function addBotMessage(message) {
+    const chatBox = document.getElementById("chat-box");
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("chat-message");
+    
+    // ボットのメッセージに改行を追加
+    messageDiv.innerHTML = message.replace(/\n/g, "<br>");
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
 // チャットをリセットして最初の状態に戻す
 function resetChat() {
     const chatBox = document.getElementById("chat-box");
@@ -162,12 +177,12 @@ function resetChat() {
     chatBox.innerHTML = '';
 
     // 最初のメッセージを表示
-    addBotMessage("こんにちは！質問を選んでください。");
+    addBotMessage("YYSystemのチャットをご利用いただきありがとうございます。<br>該当の項目を選択してください。");
 
     // 最初の選択肢を表示
     buttonContainer.innerHTML = '';  // 現在のボタンを消去
-    addButton("YYProbe -iOS版について", 1);
-    addButton("YYProbe -Android版について", 2);
-    addButton("YY文字起こしについて", 3);
-    addButton("YYデスクトップについて", 4);
+    addButton("YYProbe -iOS版について", 1000);
+    addButton("YYProbe -Android版について", 2000);
+    addButton("YY文字起こしについて", 3000);
+    addButton("YYデスクトップについて", 4000);
 }
