@@ -65,6 +65,9 @@ function showAnswer(option, optionText) {
             case 3101:
                 response ="音声認識開始すると自動で録音されます。<br>録音データは、履歴画面から確認可能です。";
                 break;
+            case 3102:
+                response ="オフラインで使用することが可能です。";
+                break;
             default:
                 response = "Error";
         }
@@ -149,6 +152,7 @@ function displayNextButtons(option) {
         case 3100:
             //　「YY文字起こしに関するFAQ」を選択した場合
             addButton("内容の録音はできる？",3101);
+            addButton("YY文字起こしはオフラインで使用可能?",3102);
             addButton("トップに戻る",0);
             break;
         default:
